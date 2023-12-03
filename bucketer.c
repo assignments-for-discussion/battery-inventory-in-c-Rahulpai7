@@ -29,34 +29,52 @@ CountsBySoH countBatteriesByHealth(int currentCapacities[], int numBatteries) {
 
     return counts;
 }
+void newcases()
+{
+     //EXTRA TEST CASES
 
-void testBucketingByHealth() {
-    printf("Counting batteries by SoH...\n\n");
-
-    
-    //EXTRA TEST CASES
-/*
     // Check counts_empty values
     int currentCapacities[] = {};
     int numBatteries_empty = 0;
     CountsBySoH counts_empty = countBatteriesByHealth(currentCapacities_empty, numBatteries_empty);
 
+    printf("Healthy Count: %d\n", counts.healthy);
+    printf("Exchange Count: %d\n", counts.exchange);
+    printf("Failed Count: %d\n", counts.failed);
+
     // Check counts_max values
     int currentCapacities[] = {1e9}; // the maximum value for battery capacity ie 1e9
     int numBatteries = sizeof(currentCapacities) / sizeof(currentCapacities[0]);
     CountsBySoH counts = countBatteriesByHealth(currentCapacities, numBatteries);
+ 
+    printf("Healthy Count: %d\n", counts.healthy);
+    printf("Exchange Count: %d\n", counts.exchange);
+    printf("Failed Count: %d\n", counts.failed);
 
     // Check counts_min values
     int currentCapacities[] = {0}; //  minimum value for battery capacity can be 0 not negative
     int numBatteries = sizeof(currentCapacities) / sizeof(currentCapacities[0]);
     CountsBySoH counts= countBatteriesByHealth(currentCapacities, numBatteries);
+  
+    printf("Healthy Count: %d\n", counts.healthy);
+    printf("Exchange Count: %d\n", counts.exchange);
+    printf("Failed Count: %d\n", counts.failed);
 
       // Check counts_equal values
     int currentCapacities_equal[] = {80, 80, 80, 80, 80}; // All capacities are equal
     int numBatteries_equal = sizeof(currentCapacities) / sizeof(currentCapacities[0]);
     CountsBySoH counts_equal = countBatteriesByHealth(currentCapacities, numBatteries);
-  */
     
+    printf("Healthy Count: %d\n", counts.healthy);
+    printf("Exchange Count: %d\n", counts.exchange);
+    printf("Failed Count: %d\n", counts.failed);
+
+    
+}
+
+
+void testBucketingByHealth() {
+    printf("Counting batteries by SoH...\n\n");
     int currentCapacities[] = {113, 116, 80, 95, 92, 70};
     int numBatteries = sizeof(currentCapacities) / sizeof(currentCapacities[0]);
 
@@ -72,5 +90,6 @@ void testBucketingByHealth() {
 
 int main() {
     testBucketingByHealth();
+    newcases();
     return 0;
 }
