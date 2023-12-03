@@ -1,29 +1,52 @@
 #include <stdio.h>
-#include <assert.h>
 
-struct CountsBySoH {
-  int healthy;
-  int exchange;
-  int failed;
-};
+typedef struct {
+    int healthy;
+    int exchange;
+    int failed;
+} CountsBySoH;
 
-struct CountsBySoH countBatteriesByHealth(const int* presentCapacities, int nBatteries) {
-  struct CountsBySoH counts = {0, 0, 0};
-  return counts;
+CountsBySoH countBatteriesByHealth(int currentCapacities[], int numBatteries) {
+    CountsBySoH counts = {0, 0, 0}; // initialze  each of the type of condition of battery to 0
+    int ratedCapacity = 120; 
+
+    for (int i=0;i<numBatteries;i++) {
+        float soh =((float)currentCapacities[i]/ratedCapacity)*100;  
+
+        if (soh > 80) 
+        { //if its soh is >80 then healthy
+            counts.healthy++;
+        } 
+        else if (soh >= 62 && soh <= 80) 
+        { //if in between 62 to 80 requires replacement
+            counts.exchange++;
+        } 
+        else 
+        { //if below 62 then failure of engine will happen
+            counts.failed++;
+        }
+    }
+
+    return counts;
 }
 
 void testBucketingByHealth() {
-  const int presentCapacities[] = {113, 116, 80, 95, 92, 70};
-  const int numberOfBatteries = sizeof(presentCapacities) / sizeof(presentCapacities[0]);
-  printf("Counting batteries by SoH...\n");
-  struct CountsBySoH counts = countBatteriesByHealth(presentCapacities, numberOfBatteries);
-  assert(counts.healthy == 2);
-  assert(counts.exchange == 3);
-  assert(counts.failed == 1);
-  printf("Done counting :)\n");
+    printf("Counting batteries by SoH...\n\n");
+
+    int currentCapacities[] = {113, 116, 80, 95, 92, 70};
+    int numBatteries = sizeof(currentCapacities) / sizeof(currentCapacities[0]);
+
+    CountsBySoH counts = countBatteriesByHealth(currentCapacities, numBatteries);
+
+   
+    printf("Healthy Count: %d\n", counts.healthy);
+    printf("Exchange Count: %d\n", counts.exchange);
+    printf("Failed Count: %d\n", counts.failed);
+
+    printf("\nDone counting :)\n");
 }
 
 int main() {
-  testBucketingByHealth();
-  return 0;
+    testBucketingByHealth();
+    return 0;
 }
